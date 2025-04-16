@@ -81,13 +81,13 @@
     <div class="function-area">
         <h3 class="section-title">软件库</h3>
         <div class="button-grid">
-            <a href="44a" class="function-btn forbidden-btn">初凉库Pro精简版</a>
+            <a href="pages/44a" class="function-btn forbidden-btn">初凉库Pro精简版</a>
         </div>
     </div>
     <div class="function-area">
         <h3 class="section-title">其他区</h3>
         <div class="button-grid">
-            <a href="58c" class="function-btn forbidden-btn">泽轩库Pro精简版</a>
+            <a href="pages/58c" class="function-btn forbidden-btn">泽轩库Pro精简版</a>
         </div>
     </div>
     <div class="function-area">
