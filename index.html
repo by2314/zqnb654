@@ -1,0 +1,86 @@
+<html lang="zh"><head> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+  <title>最强软件库</title> 
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+            background-image: url('https://images.unsplash.com/photo-1606768666853-403b30eb03c8?q=80&w=1920&h=1080');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        p {
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, .6);
+            animation: fadeIn 2s ease-in-out;
+            margin-top: 0;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .snowflake, .flower {
+            position: absolute;
+            top: -10px;
+            z-index: 999;
+            pointer-events: none;
+            font-size: 28px;
+            opacity: 0.9;
+            animation: snowfall linear infinite;
+        }
+
+        .flower {
+            color: pink;
+            font-size: 24px;
+        }
+
+        @keyframes snowfall {
+            0% { top: -10px; transform: translateX(0); opacity: 1; }
+            100% { top: 100vh; transform: translateX(calc(100vw - 100%)); opacity: 0; }
+        }
+
+        audio {
+            display: none;
+        }
+    </style> 
+  <script src="js/jq.js"></script> 
+ </head> 
+ <body id="v1"> 
+  <p id="v2">在听一首青花瓷，敬我们的初相识</p> 
+  <div id="v3" class="snowflake" style="left:10%; animation-duration:6s;">
+    ❄️ 
+  </div> 
+  <div id="v4" class="snowflake" style="left:25%; animation-duration:4s;">
+    ❄️ 
+  </div> 
+  <div id="v5" class="flower" style="left:15%; animation-duration:5s;">
+    🌸 
+  </div> 
+  <div id="v6" class="flower" style="left:40%; animation-duration:3s;">
+    🌸 
+  </div> 
+  <audio id="bg-music" loop=""> 
+   <source id="v7" src="mpv.mp3" type="audio/mp3"> 
+  </audio> 
+  <script>
+        document.addEventListener('click', function() {
+            document.getElementById('bg-music').play();
+        });
+
+        setTimeout(function() {
+            window.location.href = "99a";
+        }, 1000);
+    </script>  
+  </body>
+</html>
