@@ -109,7 +109,7 @@
         </div>
     </div>
     <script>
-        const passwordModal=document.getElementById('passwordModal'),passwordInput=document.getElementById('passwordInput'),errorMessage=document.getElementById('errorMessage'),joinGroupBtn=document.getElementById('joinGroupBtn'),submitPassword=document.getElementById('submitPassword'),functionBtns=document.querySelectorAll('.function-btn'),correctPassword='6啊66',storageKey='passwordExpiry';
+        const passwordModal=document.getElementById('passwordModal'),passwordInput=document.getElementById('passwordInput'),errorMessage=document.getElementById('errorMessage'),joinGroupBtn=document.getElementById('joinGroupBtn'),submitPassword=document.getElementById('submitPassword'),functionBtns=document.querySelectorAll('.function-btn'),correctPassword='333111',storageKey='passwordExpiry';
         const checkPasswordExpiry=()=>{const expiry=localStorage.getItem(storageKey);passwordModal.style.display=expiry&&new Date().getTime()<parseInt(expiry)?'none':'flex';};
         const checkPassword=()=>{const enteredPassword=passwordInput.value;if(enteredPassword===correctPassword){localStorage.setItem(storageKey,new Date().getTime()+3600000);passwordModal.style.display='none';}else{errorMessage.style.display='block';passwordInput.value='';}};
         joinGroupBtn.addEventListener('click',()=>window.location.href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590");
