@@ -6,33 +6,216 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>科技一片天</title>
     <style>
-        :root {--bg-main:#f0f2f5;--bg-white:#fff;--shadow:rgba(0,0,0,0.1);--border:#e0e0e0;--border-radius:10px;--text-color:#333;--success-color:#4CAF50;--error-color:#f44336;--primary-color:#2196F3;}
-        * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui;}
-        body {background:var(--bg-main);min-height:100vh;position:relative;overflow-x:hidden;}
-       .header {padding:20px;background:var(--bg-white);box-shadow:0 2px 8px var(--shadow);display:flex;justify-content:space-between;align-items:center;}
-       .avatar {width:60px;height:60px;border-radius:50%;background:#ddd;flex-shrink:0;overflow:hidden;position:relative;}
-       .avatar img {width:100%;height:100%;object-fit:cover;}
-       .avatar::after {content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,var(--primary-color) 30%,#64B5F6 100%);opacity:0.1;border-radius:50%;}
-       .function-area {margin:30px auto;background:var(--bg-white);padding:20px;border-radius:var(--border-radius);box-shadow:0 2px 8px var(--shadow);max-width:800px;}
-       .button-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
-       .function-btn {padding:25px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--border-radius);text-align:center;transition:all.3s ease;position:relative;cursor:pointer;text-decoration:none;color:var(--text-color);font-size:18px;}
-       .function-btn:active {transform:scale(0.95);}
-       .function-btn:hover {box-shadow:0 4px 12px var(--shadow);}
-       .section-title {margin-bottom:15px;font-size:22px;font-weight:bold;padding-bottom:10px;border-bottom:2px solid #eee;}
-       .announcement-modal,.modal {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:1000;}
-       .modal-content {background:var(--bg-white);padding:60px;border-radius:15px;width:95%;max-width:700px;text-align:center;}
-       .modal-title {font-size:24px;font-weight:bold;margin-bottom:20px;}
-       .modal-content p {margin-bottom:30px;color:#666;line-height:1.6;font-size:18px;}
-       .modal-buttons {display: flex;gap: 15px;justify-content: center;}
-       input[type="password"] {width:100%;padding:15px 20px;margin:10px 0;border:1px solid #ccc;border-radius:6px;font-size:16px;}
-       button {padding:12px 25px;border:none;border-radius:6px;cursor:pointer;font-size:16px;}
-       .primary {background-color:var(--success-color);color:white;}
-       .secondary {background-color:var(--error-color);color:white;}
-       #errorMessage {color:var(--error-color);display:none;font-size:16px;}
-       .search-container {display:flex;align-items:center;}
-       #searchInput {padding:12px;border:1px solid #ccc;border-radius:6px 0 0 6px;width:250px;font-size:16px;}
-       .search-button {background-color:var(--primary-color);color:white;padding:12px 18px;border:none;border-radius:0 6px 6px 0;cursor:pointer;display:flex;align-items:center;font-size:16px;}
-       .search-button i {margin-right:6px;}
+        :root {
+            --bg-main: #f0f2f5;
+            --bg-white: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e0e0e0;
+            --border-radius: 10px;
+            --text-color: #333;
+            --success-color: #4CAF50;
+            --error-color: #f44336;
+            --primary-color: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui;
+        }
+
+        body {
+            background: var(--bg-main);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+       .header {
+            padding: 20px;
+            background: var(--bg-white);
+            box-shadow: 0 2px 8px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+       .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+       .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+       .avatar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color) 30%, #64B5F6 100%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+       .function-area {
+            margin: 30px auto;
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px var(--shadow);
+            max-width: 800px;
+        }
+
+       .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+       .function-btn {
+            padding: 25px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: all.3s ease;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 18px;
+        }
+
+       .function-btn:active {
+            transform: scale(0.95);
+        }
+
+       .function-btn:hover {
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+       .section-title {
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+       .announcement-modal,.modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+       .modal-content {
+            background: var(--bg-white);
+            padding: 60px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+       .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+       .modal-content p {
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+       .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+       .primary {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+       .secondary {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        #errorMessage {
+            color: var(--error-color);
+            display: none;
+            font-size: 16px;
+        }
+
+       .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #searchInput {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px 0 0 6px;
+            width: 250px;
+            font-size: 16px;
+        }
+
+       .search-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+       .search-button i {
+            margin-right: 6px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -51,7 +234,8 @@
     <header>
         <div class="header-content">
             <div class="avatar">
-                <img src="https://pan.jl8.top/view.php/bf539903979348e5d1f4ab216ccee10a.jpg" onerror="this.style.display='none'" alt="用户头像">
+                <img src="https://pan.jl8.top/view.php/bf539903979348e5d1f4ab216ccee10a.jpg" onerror="this.style.display='none'"
+                    alt="用户头像">
             </div>
             <div>
                 <h2>科技一片天. Pro版</h2>
@@ -69,7 +253,8 @@
     <div class="function-area">
         <h3 class="section-title">核心区</h3>
         <div class="button-grid">
-            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590" class="function-btn">科技的一片天</a>
+            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590"
+                class="function-btn">科技的一片天</a>
         </div>
     </div>
     <div class="function-area">
@@ -109,13 +294,42 @@
         </div>
     </div>
     <script>
-        const passwordModal=document.getElementById('passwordModal'),passwordInput=document.getElementById('passwordInput'),errorMessage=document.getElementById('errorMessage'),joinGroupBtn=document.getElementById('joinGroupBtn'),submitPassword=document.getElementById('submitPassword'),functionBtns=document.querySelectorAll('.function-btn'),correctPassword='33311',storageKey='passwordExpiry';
-        const checkPasswordExpiry=()=>{const expiry=localStorage.getItem(storageKey);passwordModal.style.display=expiry&&new Date().getTime()<parseInt(expiry)?'none':'flex';};
-        const checkPassword=()=>{const enteredPassword=passwordInput.value;if(enteredPassword===correctPassword){localStorage.setItem(storageKey,new Date().getTime()+3600000);passwordModal.style.display='none';}else{errorMessage.style.display='block';passwordInput.value='';}};
-        joinGroupBtn.addEventListener('click',()=>window.location.href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590");
-        submitPassword.addEventListener('click',checkPassword);
-        window.onload=checkPasswordExpiry;
-        functionBtns.forEach(btn=>btn.addEventListener('click',function(){this.style.transform='scale(0.95)';setTimeout(()=>{this.style.transform='scale(1)';},200);}));
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const joinGroupBtn = document.getElementById('joinGroupBtn');
+        const submitPassword = document.getElementById('submitPassword');
+        const functionBtns = document.querySelectorAll('.function-btn');
+        const correctPassword = '33311';
+        const storageKey = 'passwordExpiry';
+
+        const checkPasswordExpiry = () => {
+            const expiry = localStorage.getItem(storageKey);
+            passwordModal.style.display = expiry && new Date().getTime() < parseInt(expiry)? 'none' : 'flex';
+        };
+
+        const checkPassword = () => {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === correctPassword) {
+                // 将有效期设置为10分钟（600000毫秒）
+                localStorage.setItem(storageKey, new Date().getTime() + 600000);
+                passwordModal.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'block';
+                passwordInput.value = '';
+            }
+        };
+
+        joinGroupBtn.addEventListener('click', () => window.location.href = "http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590");
+        submitPassword.addEventListener('click', checkPassword);
+        window.onload = checkPasswordExpiry;
+
+        functionBtns.forEach(btn => btn.addEventListener('click', function () {
+            this.style.transform ='scale(0.95)';
+            setTimeout(() => {
+                this.style.transform ='scale(1)';
+            }, 200);
+        }));
     </script>
 </body>
 
