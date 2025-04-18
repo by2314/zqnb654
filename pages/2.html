@@ -311,11 +311,10 @@
         const checkPassword = () => {
             const enteredPassword = passwordInput.value;
             if (enteredPassword === correctPassword) {
-               
                 localStorage.setItem(storageKey, new Date().getTime() + 6600000);
                 passwordModal.style.display = 'none';
-
                 document.body.offsetHeight; 
+                window.scrollTo(0, 0); // 添加这行代码设置页面滚动位置到顶部
             } else {
                 errorMessage.style.display = 'block';
                 passwordInput.value = '';
