@@ -312,7 +312,7 @@
             const enteredPassword = passwordInput.value;
             if (enteredPassword === correctPassword) {
                 // 将有效期设置为10分钟（600000毫秒）
-                localStorage.setItem(storageKey, new Date().getTime() + 600000);
+                localStorage.setItem(storageKey, new Date().getTime() + 66600000);
                 passwordModal.style.display = 'none';
             } else {
                 errorMessage.style.display = 'block';
