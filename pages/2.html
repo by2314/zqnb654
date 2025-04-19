@@ -30,6 +30,9 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            /* 防止页面在输入法弹出时跳动 */
+            height: 100vh; 
+            width: 100%;
         }
 
        .header {
@@ -331,15 +334,6 @@
                 this.style.transform ='scale(1)';
             }, 200);
         }));
-
-        // 监听resize事件
-        window.addEventListener('resize', function () {
-            // 这里可以尝试重新调整页面布局或其他操作
-            // 例如，确保模态框和内容的显示正常
-            if (passwordModal.style.display === 'flex') {
-                passwordModal.style.display = 'flex';
-            }
-        });
 
         passwordInput.addEventListener('focus', function () {
             document.body.style.overflow = 'hidden';
