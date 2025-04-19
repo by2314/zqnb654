@@ -313,8 +313,8 @@
             if (enteredPassword === correctPassword) {
                 localStorage.setItem(storageKey, new Date().getTime() + 6600000);
                 passwordModal.style.display = 'none';
-                document.body.offsetHeight; 
-                window.scrollTo(0, 0); // 添加这行代码设置页面滚动位置到顶部
+                document.body.offsetHeight;
+                window.scrollTo(0, 0);
             } else {
                 errorMessage.style.display = 'block';
                 passwordInput.value = '';
@@ -331,6 +331,23 @@
                 this.style.transform ='scale(1)';
             }, 200);
         }));
+
+        // 监听resize事件
+        window.addEventListener('resize', function () {
+            // 这里可以尝试重新调整页面布局或其他操作
+            // 例如，确保模态框和内容的显示正常
+            if (passwordModal.style.display === 'flex') {
+                passwordModal.style.display = 'flex';
+            }
+        });
+
+        passwordInput.addEventListener('focus', function () {
+            document.body.style.overflow = 'hidden';
+        });
+
+        passwordInput.addEventListener('blur', function () {
+            document.body.style.overflow = 'auto';
+        });
     </script>
 </body>
 
