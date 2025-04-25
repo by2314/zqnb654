@@ -1,348 +1,395 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>科技一片天</title>
+    <title>科技一片天 - 资源库</title>
     <style>
         :root {
-            --bg-main: #f0f2f5;
-            --bg-white: #fff;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --border: #e0e0e0;
-            --border-radius: 10px;
-            --text-color: #333;
-            --success-color: #4CAF50;
-            --error-color: #f44336;
-            --primary-color: #2196F3;
+            --primary: #7b68ee;
+            --text: #333;
+            --white: #fff;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(123, 104, 238, 0.8);
+            --header-bg: rgba(0, 0, 0, 0.7);
+            --section-title: #fcfcfc;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
-
+        
         body {
-            background: var(--bg-main);
+            background: linear-gradient(135deg, #2b2b2b, #000), url("res/0.jpeg");
+            background-size: cover;
+            background-attachment: fixed;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            /* 防止页面在输入法弹出时跳动 */
-            height: 100vh; 
-            width: 100%;
+            color: var(--white);
         }
-
-       .header {
-            padding: 20px;
-            background: var(--bg-white);
-            box-shadow: 0 2px 8px var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+            background: var(--header-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-       .avatar {
-            width: 60px;
-            height: 60px;
+        
+        .header img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: #ddd;
-            flex-shrink: 0;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            transition: transform 0.8s;
+        }
+        
+        .header img:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .header h2 {
+            margin-top: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        #progress-bar {
+            width: 80%;
+            max-width: 450px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 15px auto;
             overflow: hidden;
             position: relative;
         }
-
-       .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-       .avatar::after {
+        
+        #progress-bar::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary-color) 30%, #64B5F6 100%);
-            opacity: 0.1;
-            border-radius: 50%;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, #9370DB, #8A2BE2);
+            animation: loading 2s forwards;
         }
-
-       .function-area {
-            margin: 30px auto;
-            background: var(--bg-white);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow);
-            max-width: 800px;
+        
+        @keyframes loading {
+            0% { width: 0; }
+            100% { width: 100%; }
         }
-
-       .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 15px;
         }
-
-       .function-btn {
-            padding: 25px;
-            background: var(--bg-white);
-            border: 1px solid var(--border);
-            border-radius: var(--border-radius);
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
             text-align: center;
-            transition: all.3s ease;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
             position: relative;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 18px;
+            color: var(--section-title);
         }
-
-       .function-btn:active {
-            transform: scale(0.95);
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 3px;
         }
-
-       .function-btn:hover {
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .card-container {
+            perspective: 1000px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
             box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1/1;
         }
-
-       .section-title {
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-
-       .announcement-modal,.modal {
-            position: fixed;
+        
+        .card::before {
+            content: "";
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+            pointer-events: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #6a5acd, #9370DB);
+        }
+        
+        .card:active {
+            transform: translateY(0) scale(0.95);
+        }
+        
+        .card.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+            background: rgba(100, 100, 100, 0.6) !important;
+        }
+        
+        .card a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            position: relative;
+            z-index: 1;
         }
-
-       .modal-content {
-            background: var(--bg-white);
-            padding: 60px;
-            border-radius: 15px;
-            width: 95%;
-            max-width: 700px;
-            text-align: center;
+        
+        .card a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            transition: width 0.3s ease;
         }
-
-       .modal-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        
+        .card:hover a::after {
+            width: 70%;
+            transform: translateX(-50%);
         }
-
-       .modal-content p {
-            margin-bottom: 30px;
-            color: #666;
-            line-height: 1.6;
-            font-size: 18px;
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            transform: rotate(-15deg);
+            transition: transform 0.3s ease;
         }
-
-       .modal-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
+        
+        .card:hover .card-icon {
+            transform: rotate(0deg) scale(1.1);
         }
-
-        input[type="password"] {
-            width: 100%;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
+        
+        .secondary-section {
+            opacity: 0.8;
         }
-
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
+        
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
         }
-
-       .primary {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-       .secondary {
-            background-color: var(--error-color);
-            color: white;
-        }
-
-        #errorMessage {
-            color: var(--error-color);
-            display: none;
-            font-size: 16px;
-        }
-
-       .search-container {
-            display: flex;
-            align-items: center;
-        }
-
-        #searchInput {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px 0 0 6px;
-            width: 250px;
-            font-size: 16px;
-        }
-
-       .search-button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 18px;
-            border: none;
-            border-radius: 0 6px 6px 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-        }
-
-       .search-button i {
-            margin-right: 6px;
+        
+        @media (max-width: 480px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .header img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .header h2 {
+                font-size: 1.3rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <h2>请输入密码</h2>
-            <p>密码进群即可看 永久免费{同时简单说一下全网无人可以破解科技软件库，发给你的朋友试试吧}</p>
-            <input type="password" id="passwordInput" placeholder="输入密码">
-            <button class="primary" id="submitPassword">提交</button>
-            <button class="secondary" id="joinGroupBtn">立即进群</button>
-            <p id="errorMessage">密码错误，请重试！</p>
-        </div>
+    <div class="header">
+        <img src="https://pan.jl8.top/view.php/bf539903979348e5d1f4ab216ccee10a.jpg" onerror="this.style.display='none'" alt="用户头像">
+        <h2>科技一片天. Pro版</h2>
+        <div id="progress-bar"></div>
     </div>
-    <header>
-        <div class="header-content">
-            <div class="avatar">
-                <img src="https://pan.jl8.top/view.php/bf539903979348e5d1f4ab216ccee10a.jpg" onerror="this.style.display='none'"
-                    alt="用户头像">
-            </div>
-            <div>
-                <h2>科技一片天. Pro版</h2>
-                <p style="color:#666;font-size:14px;">本人闲暇时写的代码如有不足请告知，当然只会修错误不弄别的，进去慢这个不用管</p>
-            </div>
-            <div class="search-container">
-                <input type="search" id="searchInput" placeholder="搜索软件...">
-                <button class="search-button" id="searchButton">
-                    <i class="fas fa-search"></i>
-                    <span>搜索</span>
-                </button>
+    
+    <div class="container">
+        <div class="section">
+            <h3 class="section-title">核心区</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card">
+                        <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590">
+                            <div class="card-icon">🌐</div>
+                            科技的一片天
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
-    <div class="function-area">
-        <h3 class="section-title">核心区</h3>
-        <div class="button-grid">
-            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=-_e7igbQNNuJPM9Y0-RxOCVlZAO1LJfT&authKey=VzN6Mpzq4rVRck02sEh6ytfzDp3UQd8XyrWl6AK8Vm3zmBXf7TxSMbpqyMh41R8T&noverify=0&group_code=419049590"
-                class="function-btn">科技的一片天</a>
+        
+        <div class="section">
+            <h3 class="section-title">软件库</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card">
+                        <a href="https://linkpop.com/zqnb">
+                            <div class="card-icon">🚀</div>
+                            初凉软件库
+                        </a>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <a href="https://linkpop.com/zqnb">
+                            <div class="card-icon">🌟</div>
+                            最强软件库
+                        </a>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <a href="https://linkpop.com/zqnb">
+                            <div class="card-icon">🔍</div>
+                            泽轩软件库
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">二次元区</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card">
+                        <a href="#">
+                            <div class="card-icon">📜</div>
+                            樱花漫画
+                        </a>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <a href="#">
+                            <div class="card-icon">🎵</div>
+                            musicrutv
+                        </a>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <a href="#">
+                            <div class="card-icon">🎨</div>
+                            Picrew捏脸
+                        </a>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <a href="#">
+                            <div class="card-icon">🎥</div>
+                            acfun动漫
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section secondary-section">
+            <h3 class="section-title">其他区</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card disabled">
+                        <a href="#">
+                            <div class="card-icon">🔒</div>
+                            泽轩库Pro精简版
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section secondary-section">
+            <h3 class="section-title">禁区</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card disabled">
+                        <a href="#">
+                            <div class="card-icon">🔒</div>
+                            不想写
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section secondary-section">
+            <h3 class="section-title">高级区</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card disabled">
+                        <a href="#">
+                            <div class="card-icon">🔒</div>
+                            不想写
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section secondary-section">
+            <h3 class="section-title">在线使用</h3>
+            <div class="card-grid">
+                <div class="card-container">
+                    <div class="card disabled">
+                        <a href="#">
+                            <div class="card-icon">🔒</div>
+                            无
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="function-area">
-        <h3 class="section-title">软件库</h3>
-        <div class="button-grid">
-            <a href="https://linkpop.com/zqnb" class="function-btn">最强软件库(云更新)</a>
-        </div>
-    </div>
-    <div class="function-area">
-        <h3 class="section-title">软件库</h3>
-        <div class="button-grid">
-            <a href="3.html" class="function-btn forbidden-btn">初凉库Pro精简版</a>
-        </div>
-    </div>
-    <div class="function-area">
-        <h3 class="section-title">其他区</h3>
-        <div class="button-grid">
-            <a href="4.html" class="function-btn forbidden-btn">泽轩库Pro精简版</a>
-        </div>
-    </div>
-    <div class="function-area">
-        <h3 class="section-title">禁区</h3>
-        <div class="button-grid">
-            <a href="#" class="function-btn forbidden-btn">不想写</a>
-        </div>
-    </div>
-    <div class="function-area">
-        <h3 class="section-title">高级区</h3>
-        <div class="button-grid">
-            <a href="#" class="function-btn forbidden-btn">不想写</a>
-        </div>
-    </div>
-    <div class="function-area">
-        <h3 class="section-title">在线使用</h3>
-        <div class="button-grid">
-            <a href="#" class="function-btn forbidden-btn">无</a>
-        </div>
-    </div>
+    
     <script>
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordInput = document.getElementById('passwordInput');
-        const errorMessage = document.getElementById('errorMessage');
-        const joinGroupBtn = document.getElementById('joinGroupBtn');
-        const submitPassword = document.getElementById('submitPassword');
-        const functionBtns = document.querySelectorAll('.function-btn');
-        const correctPassword = '333111';
-        const storageKey = 'passwordExpiry';
-
-        const checkPasswordExpiry = () => {
-            const expiry = localStorage.getItem(storageKey);
-            passwordModal.style.display = expiry && new Date().getTime() < parseInt(expiry)? 'none' : 'flex';
-        };
-
-        const checkPassword = () => {
-            const enteredPassword = passwordInput.value;
-            if (enteredPassword === correctPassword) {
-                localStorage.setItem(storageKey, new Date().getTime() + 6600000);
-                passwordModal.style.display = 'none';
-                document.body.offsetHeight;
-                window.scrollTo(0, 0);
-            } else {
-                errorMessage.style.display = 'block';
-                passwordInput.value = '';
-            }
-        };
-
-        joinGroupBtn.addEventListener('click', () => window.location.href = "https://pd.qq.com/s/h290u57na?businessType=9");
-        submitPassword.addEventListener('click', checkPassword);
-        window.onload = checkPasswordExpiry;
-
-        functionBtns.forEach(btn => btn.addEventListener('click', function () {
-            this.style.transform ='scale(0.95)';
-            setTimeout(() => {
-                this.style.transform ='scale(1)';
-            }, 200);
-        }));
-
-        passwordInput.addEventListener('focus', function () {
-            document.body.style.overflow = 'hidden';
-        });
-
-        passwordInput.addEventListener('blur', function () {
-            document.body.style.overflow = 'auto';
+        document.querySelectorAll('.card:not(.disabled)').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, 200);
+            });
         });
     </script>
 </body>
-
 </html>
