@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ绑定信息查询工具</title>
+    <link rel="stylesheet" href="asses/styles.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <div class="notice">
+            <p>🌟 欢迎使用QQ绑定信息查询工具！</p>
+            <p>⚠️ 本工具仅作学习交流使用，请勿用于非法用途！</p>
+        </div>
+        
+        <h1>QQ绑定信息查询</h1>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('qq')">QQ查绑</button>
+            <button class="tab-btn" onclick="showTab('phone')">手机查绑</button>
+            <button class="tab-btn" onclick="showTab('lol')">LOL查绑</button>
+            <button class="tab-btn" onclick="showTab('weibo')">微博查绑</button>
+        </div>
+        
+        <div id="qq-tab" class="tab-content active">
+            <div class="query-box">
+                <h2>QQ查绑</h2>
+                <div class="input-group">
+                    <input type="text" id="qq-input" placeholder="请输入QQ号">
+                    <button onclick="searchQQBind()">查询</button>
+                </div>
+                <div class="loading" id="qq-loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在查询中，请稍候...</p>
+                </div>
+                <div class="result-box" id="qq-result">
+                    <div class="result-item">
+                        <h3>绑定手机</h3>
+                        <p id="qq-phone"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>手机号归属地</h3>
+                        <p id="qq-phone-area"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>LOL绑定信息</h3>
+                        <p id="qq-lol"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>微博UID</h3>
+                        <p id="qq-weibo"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>QQ密码</h3>
+                        <p id="qq-password"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="phone-tab" class="tab-content">
+            <div class="query-box">
+                <h2>手机查绑</h2>
+                <div class="input-group">
+                    <input type="text" id="phone-input" placeholder="请输入手机号">
+                    <button onclick="searchPhoneBind()">查询</button>
+                </div>
+                <div class="loading" id="phone-loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在查询中，请稍候...</p>
+                </div>
+                <div class="result-box" id="phone-result">
+                    <div class="result-item">
+                        <h3>绑定QQ</h3>
+                        <p id="phone-qq"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>手机号归属地</h3>
+                        <p id="phone-area"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>LOL绑定信息</h3>
+                        <p id="phone-lol"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>微博UID</h3>
+                        <p id="phone-weibo"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>QQ密码</h3>
+                        <p id="phone-password"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="lol-tab" class="tab-content">
+            <div class="query-box">
+                <h2>LOL查绑</h2>
+                <div class="input-group">
+                    <input type="text" id="lol-input" placeholder="请输入LOL游戏名">
+                    <button onclick="searchLolBind()">查询</button>
+                </div>
+                <div class="loading" id="lol-loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在查询中，请稍候...</p>
+                </div>
+                <div class="result-box" id="lol-result">
+                    <div class="result-item">
+                        <h3>绑定QQ</h3>
+                        <p id="lol-qq"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>游戏大区</h3>
+                        <p id="lol-area"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="weibo-tab" class="tab-content">
+            <div class="query-box">
+                <h2>微博查绑</h2>
+                <div class="input-group">
+                    <input type="text" id="weibo-input" placeholder="请输入微博ID">
+                    <button onclick="searchWeiboBind()">查询</button>
+                </div>
+                <div class="loading" id="weibo-loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在查询中，请稍候...</p>
+                </div>
+                <div class="result-box" id="weibo-result">
+                    <div class="result-item">
+                        <h3>绑定手机</h3>
+                        <p id="weibo-phone"></p>
+                    </div>
+                    <div class="result-item">
+                        <h3>手机号归属地</h3>
+                        <p id="weibo-phone-area"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools">
+            <div class="tool-card">
+                <h3>在线短视频解析</h3>
+                <p>一键解析各大平台短视频</p>
+            </div>
+            <div class="tool-card">
+                <h3>在线短信测压</h3>
+                <p>测试手机号短信接收情况</p>
+            </div>
+            <div class="tool-card">
+                <h3>在线扒站工具</h3>
+                <p>分析网站结构和资源</p>
+            </div>
+            <div class="tool-card">
+                <h3>QQ强制聊天</h3>
+                <p>发送强制聊天信息</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 QQ绑定信息查询工具 - 仅供学习交流使用</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="asses/script.js"></script>
+</body>
+</html>
