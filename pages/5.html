@@ -308,7 +308,17 @@
             document.getElementById('weibo-tab').style.display = 'none';
             document.getElementById(tabName + "-tab").style.display = 'block';
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            // Use event.currentTarget if available, otherwise use a loop or specific selector
+            // event object might not be available in all contexts if the function is called differently
+            // Let's refine this:
+            const tabButtons = document.querySelectorAll('.tab-buttons .tab-btn');
+            tabButtons.forEach(btn => {
+                if (btn.onclick.toString().includes(`showTab('${tabName}')`)) {
+                    btn.classList.add('active');
+                }
+            });
+            // Original line using event.currentTarget (works when called by button click)
+            // event.currentTarget.classList.add('active');
         }
 
         function showLoading(tab) {
@@ -321,6 +331,7 @@
 
         function showResult(tab) {
             document.getElementById(tab + "-result").style.display = 'block';
+            hideLoading(tab); // Hide loading when result box is shown
         }
 
         function hideResult(tab) {
@@ -329,7 +340,7 @@
 
         function showError(tab, message) {
             hideLoading(tab);
-            hideResult(tab);
+            hideResult(tab); // Hide previous result box
             const resultBox = document.getElementById(tab + "-result");
             resultBox.style.display = 'block';
             resultBox.innerHTML = '<div class="result-item"><h3>错误信息</h3><p>' + message + '</p></div>';
@@ -344,20 +355,30 @@
             showLoading('qq');
             hideResult('qq');
             fetch(`https://www.xywlapi.cc/qqcx2023?qq=${e}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        // Handle HTTP errors (e.g., 404, 500)
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 200) {
                         showResult('qq');
-                        document.getElementById('qq-phone').textContent = '绑定手机：' + data.phone;
-                        document.getElementById('qq-phone-area').textContent = '号码归属：' + data.phonediqu;
-                        document.getElementById('qq-lol').textContent = 'LOL信息：' + data.lol;
-                        document.getElementById('qq-weibo').textContent = '微博UID：' + data.wb;
-                        document.getElementById('qq-password').textContent = 'QQ密码：' + data.qqlm;
+                        // Added checks for data properties
+                        document.getElementById('qq-phone').textContent = '绑定手机：' + (data.phone || '未知');
+                        document.getElementById('qq-phone-area').textContent = '号码归属：' + (data.phonediqu || '未知');
+                        document.getElementById('qq-lol').textContent = 'LOL信息：' + (data.lol || '未知');
+                        document.getElementById('qq-weibo').textContent = '微博UID：' + (data.wb || '未知');
+                        document.getElementById('qq-password').textContent = 'QQ密码：' + (data.qqlm || '未知');
                     } else {
-                        showError('qq', data.message);
+                        // API returned non-200 status with a message
+                        showError('qq', data.message || '查询失败: 未知错误');
                     }
                 })
                 .catch(error => {
+                    // Handle network errors or errors thrown in .then()
+                    console.error('Fetch error:', error); // Log the actual error
                     showError('qq', '查询失败: 服务器未响应或网络异常');
                 });
         }
@@ -371,20 +392,27 @@
             showLoading('phone');
             hideResult('phone');
             fetch(`https://www.xywlapi.cc/qqxc2023?phone=${e}`)
-                .then(response => response.json())
+                .then(response => {
+                     if (!response.ok) {
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 200) {
                         showResult('phone');
-                        document.getElementById('phone-qq').textContent = '绑定QQ：' + data.qq;
-                        document.getElementById('phone-area').textContent = '号码归属：' + data.phonediqu;
-                        document.getElementById('phone-lol').textContent = 'LOL信息：' + data.lol;
-                        document.getElementById('phone-weibo').textContent = '微博UID：' + data.wb;
-                        document.getElementById('phone-password').textContent = 'QQ密码：' + data.qqlm;
+                         // Added checks for data properties
+                        document.getElementById('phone-qq').textContent = '绑定QQ：' + (data.qq || '未知');
+                        document.getElementById('phone-area').textContent = '号码归属：' + (data.phonediqu || '未知');
+                        document.getElementById('phone-lol').textContent = 'LOL信息：' + (data.lol || '未知');
+                        document.getElementById('phone-weibo').textContent = '微博UID：' + (data.wb || '未知');
+                        document.getElementById('phone-password').textContent = 'QQ密码：' + (data.qqlm || '未知');
                     } else {
-                        showError('phone', data.message);
+                        showError('phone', data.message || '查询失败: 未知错误');
                     }
                 })
                 .catch(error => {
+                    console.error('Fetch error:', error);
                     showError('phone', '查询失败: 服务器未响应或网络异常');
                 });
         }
@@ -398,17 +426,24 @@
             showLoading('lol');
             hideResult('lol');
             fetch(`https://www.xywlapi.cc/lolname?name=${e}`)
-                .then(response => response.json())
+                .then(response => {
+                     if (!response.ok) {
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 200) {
                         showResult('lol');
-                        document.getElementById('lol-qq').textContent = '绑定QQQ：' + data.qq;
-                        document.getElementById('lol-area').textContent = '游戏大区：' + data.daqu;
+                         // Added checks for data properties
+                        document.getElementById('lol-qq').textContent = '绑定QQQ：' + (data.qq || '未知');
+                        document.getElementById('lol-area').textContent = '游戏大区：' + (data.daqu || '未知');
                     } else {
-                        showError('lol', data.message);
+                        showError('lol', data.message || '查询失败: 未知错误');
                     }
                 })
                 .catch(error => {
+                    console.error('Fetch error:', error);
                     showError('lol', '查询失败: 服务器未响应或网络异常');
                 });
         }
@@ -422,17 +457,24 @@
             showLoading('weibo');
             hideResult('weibo');
             fetch(`https://www.xywlapi.cc/wbapi?id=${e}`)
-                .then(response => response.json())
+                .then(response => {
+                     if (!response.ok) {
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 200) {
                         showResult('weibo');
-                        document.getElementById('weibo-phone').textContent = '绑定手机：' + data.phone;
-                        document.getElementById('weibo-phone-area').textContent = '号码归属：' + data.phonediqu;
+                         // Added checks for data properties
+                        document.getElementById('weibo-phone').textContent = '绑定手机：' + (data.phone || '未知');
+                        document.getElementById('weibo-phone-area').textContent = '号码归属：' + (data.phonediqu || '未知');
                     } else {
-                        showError('weibo', data.message);
+                        showError('weibo', data.message || '查询失败: 未知错误');
                     }
                 })
                 .catch(error => {
+                    console.error('Fetch error:', error);
                     showError('weibo', '查询失败: 服务器未响应或网络异常');
                 });
         }
@@ -442,12 +484,24 @@
         });
 
         window.onload = function () {
-            document.getElementById('qq-tab').style.display = 'block';
-            document.querySelector('.tab-btn').classList.add('active');
+            // Ensure the first tab is shown and active button is set on load
+            showTab('qq');
+
             document.querySelectorAll('.tool-card').forEach(card => card.addEventListener('click', function () {
                 alert('功能正在完善中...');
             }));
         };
+
+         // Correctly handle tab switching on button click
+         document.querySelectorAll('.tab-buttons .tab-btn').forEach(button => {
+             button.addEventListener('click', function() {
+                 // The showTab function is already called via the onclick attribute,
+                 // but let's ensure the active class logic is robust.
+                 // Removing and re-adding active class here is redundant if showTab is called.
+                 // showTab function already handles removing active from all and adding to correct one.
+             });
+         });
+
     </script>
 </body>
 </html>
