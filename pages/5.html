@@ -34,7 +34,7 @@
         .tool-card p{color:rgba(255,255,255,0.8)}
         .footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1)}
         .particles-js{position:fixed;width:100%;height:100%;z-index:-1;top:0;left:0}
-        .notice{background:rgba(255,255,255,0.1);border-radius:10px;padding:15px;margin-bottom:30px;text-align:center}
+        .notice{background:rgba(255,255,255,255,0.1);border-radius:10px;padding:15px;margin-bottom:30px;text-align:center}
         .notice p{margin-bottom:10px}
         .notice p:last-child{margin-bottom:0}
         .loading{display:none;text-align:center;margin:20px 0}
@@ -67,132 +67,132 @@
                     <div class="loading-spinner"></div>
                     <p>正在查询中，请稍候...</p>
                 </div>
-                <div class="result-box" id="qq-result">
-                    <div class="result-item">
-                        <h3>绑定手机</h3>
-                        <p id="qq-phone"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>手机号归属地</h3>
-                        <p id="qq-phone-area"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>LOL绑定信息</h3>
-                        <p id="qq-lol"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>微博UID</h3>
-                        <p id="qq-weibo"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>QQ密码</h3>
-                        <p id="qq-password"></p>
-                    </div>
+            <div class="result-box" id="qq-result">
+                <div class="result-item">
+                    <h3>绑定手机</h3>
+                    <p id="qq-phone"></p>
+                </div>
+                <div class="result-item">
+                    <h3>手机号归属地</h3>
+                    <p id="qq-phone-area"></p>
+                </div>
+                <div class="result-item">
+                    <h3>LOL绑定信息</h3>
+                    <p id="qq-lol"></p>
+                </div>
+                <div class="result-item">
+                    <h3>微博UID</h3>
+                    <p id="qq-weibo"></p>
+                </div>
+                <div class="result-item">
+                    <h3>QQ密码</h3>
+                    <p id="qq-password"></p>
                 </div>
             </div>
         </div>
-        <div id="phone-tab" class="tab-content">
-            <div class="query-box">
-                <h2>手机查绑</h2>
-                <div class="input-group">
-                    <input type="text" id="phone-input" placeholder="请输入手机号">
-                    <button onclick="searchPhoneBind()">查询</button>
+    </div>
+    <div id="phone-tab" class="tab-content">
+        <div class="query-box">
+            <h2>手机查绑</h2>
+            <div class="input-group">
+                <input type="text" id="phone-input" placeholder="请输入手机号">
+                <button onclick="searchPhoneBind()">查询</button>
+            </div>
+            <div class="loading" id="phone-loading">
+                <div class="loading-spinner"></div>
+                <p>正在查询中，请稍候...</p>
+            </div>
+            <div class="result-box" id="phone-result">
+                <div class="result-item">
+                    <h3>绑定QQQ</h3>
+                    <p id="phone-qq"></p>
                 </div>
-                <div class="loading" id="phone-loading">
-                    <div class="loading-spinner"></div>
-                    <p>正在查询中，请稍候...</p>
+                <div class="result-item">
+                    <h3>手机号归属地</h3>
+                    <p id="phone-area"></p>
                 </div>
-                <div class="result-box" id="phone-result">
-                    <div class="result-item">
-                        <h3>绑定QQ</h3>
-                        <p id="phone-qq"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>手机号归属地</h3>
-                        <p id="phone-area"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>LOL绑定信息</h3>
-                        <p id="phone-lol"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>微博UID</h3>
-                        <p id="phone-weibo"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>QQ密码</h3>
-                        <p id="phone-password"></p>
-                    </div>
+                <div class="result-item">
+                    <h3>LOL绑定信息</h3>
+                    <p id="phone-lol"></p>
+                </div>
+                <div class="result-item">
+                    <h3>微博UID</h3>
+                    <p id="phone-weibo"></p>
+                </div>
+                <div class="result-item">
+                    <h3>QQ密码</h3>
+                    <p id="phone-password"></p>
                 </div>
             </div>
         </div>
-        <div id="lol-tab" class="tab-content">
-            <div class="query-box">
-                <h2>LOL查绑</h2>
-                <div class="input-group">
-                    <input type="text" id="lol-input" placeholder="请输入LOL游戏名">
-                    <button onclick="searchLolBind()">查询</button>
-                </div>
-                <div class="loading" id="lol-loading">
-                    <div class="loading-spinner"></div>
-                    <p>正在查询中，请稍候...</p>
-                </div>
-                <div class="result-box" id="lol-result">
-                    <div class="result-item">
-                        <h3>绑定QQ</h3>
-                        <p id="lol-qq"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>游戏大区</h3>
-                        <p id="lol-area"></p>
-                    </div>
-                </div>
+    </div>
+    <div id="lol-tab" class="tab-content">
+        <div class="query-box">
+            <h2>LOL查绑</h2>
+            <div class="input-group">
+                <input type="text" id="lol-input" placeholder="请输入LOL游戏名">
+                <button onclick="searchLolBind()">查询</button>
             </div>
-        </div>
-        <div id="weibo-tab" class="tab-content">
-            <div class="query-box">
-                <h2>微博查绑</h2>
-                <div class="input-group">
-                    <input type="text" id="weibo-input" placeholder="请输入微博ID">
-                    <button onclick="searchWeiboBind()">查询</button>
+            <div class="loading" id="lol-loading">
+                <div class="loading-spinner"></div>
+                <p>正在查询中，请稍候...</p>
+            </div>
+            <div class="result-box" id="lol-result">
+                <div class="result-item">
+                    <h3>绑定QQQ</h3>
+                    <p id="lol-qq"></p>
                 </div>
-                <div class="loading" id="weibo-loading">
-                    <div class="loading-spinner"></div>
-                    <p>正在查询中，请稍候...</p>
-                </div>
-                <div class="result-box" id="weibo-result">
-                    <div class="result-item">
-                        <h3>绑定手机</h3>
-                        <p id="weibo-phone"></p>
-                    </div>
-                    <div class="result-item">
-                        <h3>手机号归属地</h3>
-                        <p id="weibo-phone-area"></p>
-                    </div>
+                <div class="result-item">
+                    <h3>游戏大区</h3>
+                    <p id="lol-area"></p>
                 </div>
             </div>
         </div>
-        <div class="tools">
-            <div class="tool-card">
-                <h3>在线短视频解析</h3>
-                <p>一键解析各大平台短视频</p>
+    </div>
+    <div id="weibo-tab" class="tab-content">
+        <div class="query-box">
+            <h2>微博查绑</h2>
+            <div class="input-group">
+                <input type="text" id="weibo-input" placeholder="请输入微博ID">
+                <button onclick="searchWeiboBind()">查询</button>
             </div>
-            <div class="tool-card">
-                <h3>在线短信测压</h3>
-                <p>测试手机号短信接收情况</p>
+            <div class="loading" id="weibo-loading">
+                <div class="loading-spinner"></div>
+                <p>正在查询中，请稍候...</p>
             </div>
-            <div class="tool-card">
-                <h3>在线扒站工具</h3>
-                <p>分析网站结构和资源</p>
-            </div>
-            <div class="tool-card">
-                <h3>QQ强制聊天</h3>
-                <p>发送强制聊天信息</p>
+            <div class="result-box" id="weibo-result">
+                <div class="result-item">
+                    <h3>绑定手机</h3>
+                    <p id="weibo-phone"></p>
+                </div>
+                <div class="result-item">
+                    <h3>手机号归属地</h3>
+                    <p id="weibo-phone-area"></p>
+                </div>
             </div>
         </div>
-        <div class="footer">
-            <p>© 2025 QQ绑定信息查询工具 - 仅供学习交流使用</p>
+    </div>
+    <div class="tools">
+        <div class="tool-card">
+            <h3>在线短视频解析</h3>
+            <p>一键解析各大平台短视频</p>
         </div>
+        <div class="tool-card">
+            <h3>在线短信测压</h3>
+            <p>测试手机号短信接收情况</p>
+        </div>
+        <div class="tool-card">
+            <h3>在线扒站工具</h3>
+            <p>分析网站结构和资源</p>
+        </div>
+        <div class="tool-card">
+            <h3>QQ强制聊天</h3>
+            <p>发送强制聊天信息</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 QQ绑定信息查询工具 - 仅供学习交流使用</p>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -327,10 +327,18 @@
             document.getElementById(tab + "-result").style.display = 'none';
         }
 
+        function showError(tab, message) {
+            hideLoading(tab);
+            hideResult(tab);
+            const resultBox = document.getElementById(tab + "-result");
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = '<div class="result-item"><h3>错误信息</h3><p>' + message + '</p></div>';
+        }
+
         function searchQQBind() {
             const e = document.getElementById('qq-input').value;
             if (!e) {
-                alert('请输入QQ号');
+                showError('qq', '请输入QQ号');
                 return;
             }
             showLoading('qq');
@@ -338,7 +346,6 @@
             fetch(`https://www.xywlapi.cc/qqcx2023?qq=${e}`)
                 .then(response => response.json())
                 .then(data => {
-                    hideLoading('qq');
                     if (data.status === 200) {
                         showResult('qq');
                         document.getElementById('qq-phone').textContent = '绑定手机：' + data.phone;
@@ -347,19 +354,18 @@
                         document.getElementById('qq-weibo').textContent = '微博UID：' + data.wb;
                         document.getElementById('qq-password').textContent = 'QQ密码：' + data.qqlm;
                     } else {
-                        alert('查询失败: ' + data.message);
+                        showError('qq', data.message);
                     }
                 })
                 .catch(error => {
-                    hideLoading('qq');
-                    alert('查询失败: 服务器未响应或网络异常');
+                    showError('qq', '查询失败: 服务器未响应或网络异常');
                 });
         }
 
         function searchPhoneBind() {
             const e = document.getElementById('phone-input').value;
             if (!e) {
-                alert('请输入手机号');
+                showError('phone', '请输入手机号');
                 return;
             }
             showLoading('phone');
@@ -367,7 +373,6 @@
             fetch(`https://www.xywlapi.cc/qqxc2023?phone=${e}`)
                 .then(response => response.json())
                 .then(data => {
-                    hideLoading('phone');
                     if (data.status === 200) {
                         showResult('phone');
                         document.getElementById('phone-qq').textContent = '绑定QQ：' + data.qq;
@@ -376,19 +381,18 @@
                         document.getElementById('phone-weibo').textContent = '微博UID：' + data.wb;
                         document.getElementById('phone-password').textContent = 'QQ密码：' + data.qqlm;
                     } else {
-                        alert('查询失败: ' + data.message);
+                        showError('phone', data.message);
                     }
                 })
                 .catch(error => {
-                    hideLoading('phone');
-                    alert('查询失败: 服务器未响应或网络异常');
+                    showError('phone', '查询失败: 服务器未响应或网络异常');
                 });
         }
 
         function searchLolBind() {
             const e = document.getElementById('lol-input').value;
             if (!e) {
-                alert('请输入LOL游戏名');
+                showError('lol', '请输入LOL游戏名');
                 return;
             }
             showLoading('lol');
@@ -396,25 +400,23 @@
             fetch(`https://www.xywlapi.cc/lolname?name=${e}`)
                 .then(response => response.json())
                 .then(data => {
-                    hideLoading('lol');
                     if (data.status === 200) {
                         showResult('lol');
-                        document.getElementById('lol-qq').textContent = '绑定QQ：' + data.qq;
+                        document.getElementById('lol-qq').textContent = '绑定QQQ：' + data.qq;
                         document.getElementById('lol-area').textContent = '游戏大区：' + data.daqu;
                     } else {
-                        alert('查询失败: ' + data.message);
+                        showError('lol', data.message);
                     }
                 })
                 .catch(error => {
-                    hideLoading('lol');
-                    alert('查询失败: 服务器未响应或网络异常');
+                    showError('lol', '查询失败: 服务器未响应或网络异常');
                 });
         }
 
         function searchWeiboBind() {
             const e = document.getElementById('weibo-input').value;
             if (!e) {
-                alert('请输入微博ID');
+                showError('weibo', '请输入微博ID');
                 return;
             }
             showLoading('weibo');
@@ -422,18 +424,16 @@
             fetch(`https://www.xywlapi.cc/wbapi?id=${e}`)
                 .then(response => response.json())
                 .then(data => {
-                    hideLoading('weibo');
                     if (data.status === 200) {
                         showResult('weibo');
                         document.getElementById('weibo-phone').textContent = '绑定手机：' + data.phone;
                         document.getElementById('weibo-phone-area').textContent = '号码归属：' + data.phonediqu;
                     } else {
-                        alert('查询失败: ' + data.message);
+                        showError('weibo', data.message);
                     }
                 })
                 .catch(error => {
-                    hideLoading('weibo');
-                    alert('查询失败: 服务器未响应或网络异常');
+                    showError('weibo', '查询失败: 服务器未响应或网络异常');
                 });
         }
 
