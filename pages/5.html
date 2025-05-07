@@ -34,7 +34,7 @@
         .tool-card p{color:rgba(255,255,255,0.8)}
         .footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1)}
         .particles-js{position:fixed;width:100%;height:100%;z-index:-1;top:0;left:0}
-        .notice{background:rgba(255,255,255,0.1);border-radius:10px;padding:15px;margin-bottom:30px;text-align:center}
+        .notice{background:rgba(255,255,255,255,0.1);border-radius:10px;padding:15px;margin-bottom:30px;text-align:center}
         .notice p{margin-bottom:10px}
         .notice p:last-child{margin-bottom:0}
         .loading{display:none;text-align:center;margin:20px 0}
@@ -319,18 +319,20 @@
             document.getElementById(tab + "-loading").style.display = 'none';
         }
 
-        function clearResults() {
-            const resultElements = document.querySelectorAll('.result-box');
-            resultElements.forEach(element => {
-                element.style.display = 'none';
-            });
+        function showResult(tab) {
+            document.getElementById(tab + "-result").style.display = 'block';
+        }
+
+        function hideResult(tab) {
+            document.getElementById(tab + "-result").style.display = 'none';
         }
 
         function showError(tab, message) {
             hideLoading(tab);
+            hideResult(tab);
             const resultBox = document.getElementById(tab + "-result");
-            resultBox.innerHTML = '<div class="result-item"><h3>错误信息</h3><p>' + message + '</p></div>';
             resultBox.style.display = 'block';
+            resultBox.innerHTML = '<div class="result-item"><h3>错误信息</h3><p>' + message + '</p></div>';
         }
 
         function searchQQBind() {
@@ -340,12 +342,12 @@
                 return;
             }
             showLoading('qq');
-            clearResults();
+            hideResult('qq');
             fetch(`https://www.xywlapi.cc/qqcx2023?qq=${e}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 200) {
-                        document.getElementById('qq-result').style.display = 'block';
+                        showResult('qq');
                         document.getElementById('qq-phone').textContent = '绑定手机：' + data.phone;
                         document.getElementById('qq-phone-area').textContent = '号码归属：' + data.phonediqu;
                         document.getElementById('qq-lol').textContent = 'LOL信息：' + data.lol;
@@ -367,12 +369,12 @@
                 return;
             }
             showLoading('phone');
-            clearResults();
+            hideResult('phone');
             fetch(`https://www.xywlapi.cc/qqxc2023?phone=${e}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 200) {
-                        document.getElementById('phone-result').style.display = 'block';
+                        showResult('phone');
                         document.getElementById('phone-qq').textContent = '绑定QQ：' + data.qq;
                         document.getElementById('phone-area').textContent = '号码归属：' + data.phonediqu;
                         document.getElementById('phone-lol').textContent = 'LOL信息：' + data.lol;
@@ -394,13 +396,13 @@
                 return;
             }
             showLoading('lol');
-            clearResults();
+            hideResult('lol');
             fetch(`https://www.xywlapi.cc/lolname?name=${e}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 200) {
-                        document.getElementById('lol-result').style.display = 'block';
-                        document.getElementById('lol-qq').textContent = '绑定QQ：' + data.qq;
+                        showResult('lol');
+                        document.getElementById('lol-qq').textContent = '绑定QQQ：' + data.qq;
                         document.getElementById('lol-area').textContent = '游戏大区：' + data.daqu;
                     } else {
                         showError('lol', data.message);
@@ -418,12 +420,12 @@
                 return;
             }
             showLoading('weibo');
-            clearResults();
+            hideResult('weibo');
             fetch(`https://www.xywlapi.cc/wbapi?id=${e}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 200) {
-                        document.getElementById('weibo-result').style.display = 'block';
+                        showResult('weibo');
                         document.getElementById('weibo-phone').textContent = '绑定手机：' + data.phone;
                         document.getElementById('weibo-phone-area').textContent = '号码归属：' + data.phonediqu;
                     } else {
