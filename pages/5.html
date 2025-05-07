@@ -299,155 +299,155 @@
                 },
                 "retina_detect": true
             });
-        });
+        });  function showTab(tabName) {
+        document.getElementById('qq-tab').style.display = 'none';
+        document.getElementById('phone-tab').style.display = 'none';
+        document.getElementById('lol-tab').style.display = 'none';
+        document.getElementById('weibo-tab').style.display = 'none';
+        document.getElementById(tabName + "-tab").style.display = 'block';
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
 
-        function showTab(tabName) {
-            document.getElementById('qq-tab').style.display = 'none';
-            document.getElementById('phone-tab').style.display = 'none';
-            document.getElementById('lol-tab').style.display = 'none';
-            document.getElementById('weibo-tab').style.display = 'none';
-            document.getElementById(tabName + "-tab").style.display = 'block';
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+    function showLoading(tab) {
+        document.getElementById(tab + "-loading").style.display = 'block';
+    }
+
+    function hideLoading(tab) {
+        document.getElementById(tab + "-loading").style.display = 'none';
+    }
+
+    function showResult(tab) {
+        document.getElementById(tab + "-result").style.display = 'block';
+    }
+
+    function hideResult(tab) {
+        document.getElementById(tab + "-result").style.display = 'none';
+    }
+
+    function searchQQBind() {
+        const e = document.getElementById('qq-input').value;
+        if (!e) {
+            alert('请输入QQ号');
+            return;
         }
-
-        function showLoading(tab) {
-            document.getElementById(tab + "-loading").style.display = 'block';
-        }
-
-        function hideLoading(tab) {
-            document.getElementById(tab + "-loading").style.display = 'none';
-        }
-
-        function showResult(tab) {
-            document.getElementById(tab + "-result").style.display = 'block';
-        }
-
-        function hideResult(tab) {
-            document.getElementById(tab + "-result").style.display = 'none';
-        }
-
-        function searchQQBind() {
-            const e = document.getElementById('qq-input').value;
-            if (!e) {
-                alert('请输入QQ号');
-                return;
-            }
-            showLoading('qq');
-            hideResult('qq');
-            fetch(`https://www.xywlapi.cc/qqcx2023?qq=${e}`)
-                .then(response => response.json())
-                .then(data => {
-                    hideLoading('qq');
-                    if (data.status === 200) {
-                        showResult('qq');
-                        document.getElementById('qq-phone').textContent = '绑定手机：' + data.phone;
-                        document.getElementById('qq-phone-area').textContent = '号码归属：' + data.phonediqu;
-                        document.getElementById('qq-lol').textContent = 'LOL信息：' + data.lol;
-                        document.getElementById('qq-weibo').textContent = '微博UID：' + data.wb;
-                        document.getElementById('qq-password').textContent = 'QQ密码：' + data.qqlm;
-                    } else {
-                        alert('查询失败: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    hideLoading('qq');
+        showLoading('qq');
+        hideResult('qq');
+        fetch(`https://www.xywlapi.cc/qqcx2023?qq=${e}`)
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('qq');
+                if (data.status === 200) {
+                    showResult('qq');
+                    document.getElementById('qq-phone').textContent = '绑定手机：' + data.phone;
+                    document.getElementById('qq-phone-area').textContent = '号码归属：' + data.phonediqu;
+                    document.getElementById('qq-lol').textContent = 'LOL信息：' + data.lol;
+                    document.getElementById('qq-weibo').textContent = '微博UID：' + data.wb;
+                    document.getElementById('qq-password').textContent = 'QQ密码：' + data.qqlm;
+                } else {
                     alert('查询失败: 服务器未响应或网络异常');
-                });
-        }
+                }
+            })
+            .catch(error => {
+                hideLoading('qq');
+                alert('查询失败: 服务器未响应或网络异常');
+            });
+    }
 
-        function searchPhoneBind() {
-            const e = document.getElementById('phone-input').value;
-            if (!e) {
-                alert('请输入手机号');
-                return;
-            }
-            showLoading('phone');
-            hideResult('phone');
-            fetch(`https://www.xywlapi.cc/qqxc2023?phone=${e}`)
-                .then(response => response.json())
-                .then(data => {
-                    hideLoading('phone');
-                    if (data.status === 200) {
-                        showResult('phone');
-                        document.getElementById('phone-qq').textContent = '绑定QQ：' + data.qq;
-                        document.getElementById('phone-area').textContent = '号码归属：' + data.phonediqu;
-                        document.getElementById('phone-lol').textContent = 'LOL信息：' + data.lol;
-                        document.getElementById('phone-weibo').textContent = '微博UID：' + data.wb;
-                        document.getElementById('phone-password').textContent = 'QQ密码：' + data.qqlm;
-                    } else {
-                        alert('查询失败: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    hideLoading('phone');
+    function searchPhoneBind() {
+        const e = document.getElementById('phone-input').value;
+        if (!e) {
+            alert('请输入手机号');
+            return;
+        }
+        showLoading('phone');
+        hideResult('phone');
+        fetch(`https://www.xywlapi.cc/qqxc2023?phone=${e}`)
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('phone');
+                if (data.status === 200) {
+                    showResult('phone');
+                    document.getElementById('phone-qq').textContent = '绑定QQ：' + data.qq;
+                    document.getElementById('phone-area').textContent = '号码归属：' + data.phonediqu;
+                    document.getElementById('phone-lol').textContent = 'LOL信息：' + data.lol;
+                    document.getElementById('phone-weibo').textContent = '微博UID：' + data.wb;
+                    document.getElementById('phone-password').textContent = 'QQ密码：' + data.qqlm;
+                } else {
                     alert('查询失败: 服务器未响应或网络异常');
-                });
-        }
+                }
+            })
+            .catch(error => {
+                hideLoading('phone');
+                alert('查询失败: 服务器未响应或网络异常');
+            });
+    }
 
-        function searchLolBind() {
-            const e = document.getElementById('lol-input').value;
-            if (!e) {
-                alert('请输入LOL游戏名');
-                return;
-            }
-            showLoading('lol');
-            hideResult('lol');
-            fetch(`https://www.xywlapi.cc/lolname?name=${e}`)
-                .then(response => response.json())
-                .then(data => {
-                    hideLoading('lol');
-                    if (data.status === 200) {
-                        showResult('lol');
-                        document.getElementById('lol-qq').textContent = '绑定QQ：' + data.qq;
-                        document.getElementById('lol-area').textContent = '游戏大区：' + data.daqu;
-                    } else {
-                        alert('查询失败: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    hideLoading('lol');
+    function searchLolBind() {
+        const e = document.getElementById('lol-input').value;
+        if (!e) {
+            alert('请输入LOL游戏名');
+            return;
+        }
+        showLoading('lol');
+        hideResult('lol');
+        fetch(`https://www.xywlapi.cc/lolname?name=${e}`)
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('lol');
+                if (data.status === 200) {
+                    showResult('lol');
+                    document.getElementById('lol-qq').textContent = '绑定QQ：' + data.qq;
+                    document.getElementById('lol-area').textContent = '游戏大区：' + data.daqu;
+                } else {
                     alert('查询失败: 服务器未响应或网络异常');
-                });
-        }
+                }
+            })
+            .catch(error => {
+                hideLoading('lol');
+                alert('查询失败: 服务器未响应或网络异常');
+            });
+    }
 
-        function searchWeiboBind() {
-            const e = document.getElementById('weibo-input').value;
-            if (!e) {
-                alert('请输入微博ID');
-                return;
-            }
-            showLoading('weibo');
-            hideResult('weibo');
-            fetch(`https://www.xywlapi.cc/wbapi?id=${e}`)
-                .then(response => response.json())
-                .then(data => {
-                    hideLoading('weibo');
-                    if (data.status === 200) {
-                        showResult('weibo');
-                        document.getElementById('weibo-phone').textContent = '绑定手机：' + data.phone;
-                        document.getElementById('weibo-phone-area').textContent = '号码归属：' + data.phonediqu;
-                    } else {
-                        alert('查询失败: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    hideLoading('weibo');
+    function searchWeiboBind() {
+        const e = document.getElementById('weibo-input').value;
+        if (!e) {
+            alert('请输入微博ID');
+            return;
+        }
+        showLoading('weibo');
+        hideResult('weibo');
+        fetch(`https://www.xywlapi.cc/wbapi?id=${e}`)
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('weibo');
+                if (data.status === 200) {
+                    showResult('weibo');
+                    document.getElementById('weibo-phone').textContent = '绑定手机：' + data.phone;
+                    document.getElementById('weibo-phone-area').textContent = '号码归属：' + data.phonediqu;
+                } else {
                     alert('查询失败: 服务器未响应或网络异常');
-                });
-        }
+                }
+            })
+            .catch(error => {
+                hideLoading('weibo');
+                alert('查询失败: 服务器未响应或网络异常');
+            });
+    }
 
-        document.addEventListener('copy', function () {
-            alert('复制成功！');
-        });
+    document.addEventListener('copy', function () {
+        alert('复制成功！');
+    });
 
-        window.onload = function () {
-            document.getElementById('qq-tab').style.display = 'block';
-            document.querySelector('.tab-btn').classList.add('active');
-            document.querySelectorAll('.tool-card').forEach(card => card.addEventListener('click', function () {
-                alert('功能正在完善中...');
-            }));
-        };
-    </script>
+    window.onload = function () {
+        document.getElementById('qq-tab').style.display = 'block';
+        document.querySelector('.tab-btn').classList.add('active');
+        document.querySelectorAll('.tool-card').forEach(card => card.addEventListener('click', function () {
+            alert('功能正在完善中...');
+        }));
+    };
+</script>
+
 </body>
 </html>
+
